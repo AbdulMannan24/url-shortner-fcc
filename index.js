@@ -36,18 +36,18 @@ app.post('/api/shorturl', (req, res) => {
   dns.lookup(hostName, (err, address, family) => {
     if (err) {
       console.log("i am here");
-
       return res.json({ error: 'invalid url'});
     }
-  })
-  let number = Math.floor((Math.random() *100) + 1);
-  let response = {
-    original_url: req.body.url,
-    short_url: number
-  }
-  store.push(response);
-  res.json(response);
-})
+    let number = Math.floor((Math.random() *100) + 1);
+    let response = {
+      original_url: req.body.url,
+      short_url: number
+    };
+    store.push(response);
+    res.json(response);
+  });
+});
+
 
 app.get('/api/shorturl/:short_url', (req, res) => {
   let number = Number(req.params.short_url)
