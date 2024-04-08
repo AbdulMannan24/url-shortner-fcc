@@ -24,11 +24,19 @@ app.get('/api/hello', function(req, res) {
 
 // my code
 app.post('/api/shorturl', (req, res) => {
-  let url = new URL(req.body.url);
+  let url;
+  try {
+    url = new URL(req.body.url);
+  } catch (error) {
+    // If the URL is invalid, respond with an error
+    return res.json({ error: 'invalid url' });
+  }
   let hostName = url.hostname;
   console.log(hostName);
   dns.lookup(hostName, (err, address, family) => {
     if (err) {
+      console.log("i am here");
+      console.log(err);
       res.json({ error: 'invalid url'});
       return;
     }
