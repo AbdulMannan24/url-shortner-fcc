@@ -36,9 +36,8 @@ app.post('/api/shorturl', (req, res) => {
   dns.lookup(hostName, (err, address, family) => {
     if (err) {
       console.log("i am here");
-      console.log(err);
-      res.json({ error: 'invalid url'});
-      return;
+
+      return res.json({ error: 'invalid url'});
     }
   })
   let number = Math.floor((Math.random() *100) + 1);
